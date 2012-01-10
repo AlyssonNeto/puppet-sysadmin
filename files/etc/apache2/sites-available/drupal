@@ -1,0 +1,31 @@
+<Directory /var/www/example.drupalpeople.com/docroot>
+     # Options Indexes FollowSymLinks MultiViews
+     AllowOverride none
+
+     <FilesMatch "(install.php|cron.php|update.php)$">
+          Order deny,allow
+          # If you want to list IP addresses that can access these files, create the following file:
+          #Include /etc/apache2/sites-available/ip.conf
+          Deny from all
+     </FilesMatch>
+
+     # Performance boost. Load up .htaccess once.
+     Include /var/www/example.drupalpeople.com/docroot/.htaccess
+</Directory>
+
+<VirtualHost *:80>
+  RewriteEngine On
+
+  # Admin email, Server Name (domain name) and any aliases
+  ServerAdmin james.sansbury@lullabot.com
+  ServerName  example.drupalpeople.com
+
+  # Index file and Document Root (where the public files are located)
+  DirectoryIndex index.php
+  DocumentRoot /var/www/example.drupalpeople.com/docroot
+
+  # Custom log file locations
+  LogLevel warn
+  ErrorLog  /var/log/httpd/example_drupalpeople_com_error.log
+  CustomLog /var/log/httpd/example_drupalpeople_com_access.log combined
+</VirtualHost>

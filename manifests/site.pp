@@ -1,6 +1,7 @@
 import "classes/*.pp"
 
 node sysadmin_lamp {
+  include variables
   include apache
 }
 
